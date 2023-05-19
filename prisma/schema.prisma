@@ -52,3 +52,46 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// 业务表开始
+model Document {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  category    Int      @default(0)
+  fileUrl     String
+  fileType    Int      @default(0)
+  content     String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model TestPaper {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model TestPaperSubject {
+  id          Int      @id @default(autoincrement())
+  testId      Int
+  subjectType Int      @default(0)
+  title       String
+  description String
+  answer      String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model TestResult {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  testId    Int
+  otherResult String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
